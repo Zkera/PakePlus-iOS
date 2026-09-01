@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- iOS / mobile -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="theme-color" content="#f4f7fc" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- SEO / Share (static; individual score goes via Web Share API text) -->
+    <title>Онлайн-квест · Александровский сад</title>
+    <meta
+      name="description"
+      content="Городской квест по Александровскому саду в Санкт-Петербурге. Пройди по следам истории и помоги Елисею найти Василису."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Онлайн-квест · Александровский сад" />
+    <meta
+      property="og:description"
+      content="Городской квест по Александровскому саду в Санкт-Петербурге. Помоги Елисею найти Василису."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts: Onest (headings/body) + Inter (buttons) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (() => {
+        const selectors = [
+          'layero-badge',
+          'script[data-layero-footer]'
+        ];
+
+        function removeLayero() {
+          document.querySelectorAll(selectors.join(',')).forEach(el => {
+            el.remove();
+          });
+        }
+
+        // удалить сразу
+        removeLayero();
+
+        // следить за новыми элементами
+        const observer = new MutationObserver((mutations) => {
+          for (const mutation of mutations) {
+            for (const node of mutation.addedNodes) {
+              if (!(node instanceof Element)) continue;
+
+              if (
+                      node.matches?.(selectors.join(',')) ||
+                      node.querySelector?.(selectors.join(','))
+              ) {
+                removeLayero();
+                break;
+              }
+            }
+          }
+        });
+
+        observer.observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
+      })();
+
+      const originalDefine = customElements.define;
+
+      customElements.define = function(name, ctor, options) {
+        if (name === 'layero-badge') {
+          return;
+        }
+
+        return originalDefine.call(this, name, ctor, options);
+      };
+    </script>
+    <script type="module" crossorigin src="./assets/index-Btbla_J2.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BEEnc3nn.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
